@@ -1,0 +1,37 @@
+# 是否启用自定义服务器列表 MOTD。
+motd:
+  enabled: true
+  # 第一行 MOTD，支持 Minecraft 颜色符号 &。
+  line-1: "&d&lPureblock &8| &b纯境方块"
+  # 第二行 MOTD，支持 Minecraft 颜色符号 &。
+  line-2: "&7一个安静、纯净、认真建造的世界 &8- &a欢迎回来"
+  rotation:
+    # 是否启用 MOTD 轮换。开启后会按 interval-seconds 从 entries 中轮换显示。
+    enabled: true
+    # 每条 MOTD 显示的时间，单位为秒。
+    interval-seconds: 30
+    # 轮换列表，支持 %online%、%max%、%server%、%time%。
+    entries:
+      - line-1: "&d&lPureblock &8| &b纯境方块"
+        line-2: "&7一个安静、纯净、认真建造的世界 &8- &a欢迎回来"
+      - line-1: "&b&lPureblock &8| &f当前在线 &a%online%&7/&e%max%"
+        line-2: "&7愿你在这片纯净世界里留下漂亮的建筑"
+      - line-1: "&a&lPureblock &8| &e欢迎新的旅人"
+        line-2: "&7输入服务器地址，进入纯境方块"
+
+tab-list:
+  # 是否启用游戏内 TAB 顶部/底部自定义内容。
+  enabled: true
+  # TAB 玩家列表顶部内容，支持多行。
+  header:
+    - "&d&lPureblock &8| &b纯境方块"
+    - "&7在线：&a%online%&7/&e%max%"
+  # TAB 玩家列表底部内容，支持多行。
+  footer:
+    - "&7欢迎回来，&b%player%&7。"
+    - "&8%time%"
+
+# 是否自定义服务器列表显示的最大人数。
+max-players:
+  enabled: false
+  value: 100

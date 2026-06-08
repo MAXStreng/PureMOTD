@@ -1,0 +1,14 @@
+name: PureMOTD
+version: 1.1.0
+main: com.mc.puremotd.PureMOTDPlugin
+api-version: '1.20'
+author: MoonMiut
+description: Lightweight configurable server list MOTD plugin for Bukkit API 1.20+.
+commands:
+  puremotd:
+    description: PureMOTD admin command.
+    usage: /puremotd reload
+permissions:
+  puremotd.admin:
+    description: Allows reloading PureMOTD.
+    default: op
