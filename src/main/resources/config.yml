@@ -22,6 +22,8 @@ motd:
 tab-list:
   # 是否启用游戏内 TAB 顶部/底部自定义内容。
   enabled: true
+  # TAB 内容自动刷新间隔，单位为秒。用于实时刷新 %time%、%online%、%max% 等占位符。
+  refresh-interval-seconds: 1
   # TAB 玩家列表顶部内容，支持多行。
   header:
     - "&d&lPureblock &8| &b纯境方块"

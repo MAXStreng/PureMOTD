@@ -1,6 +1,6 @@
 # PureMOTD
 
-Current version: `v1.1.0`
+Current version: `v1.2.0`
 
 PureMOTD is a lightweight server-list MOTD plugin for customizing the description players see in the Minecraft multiplayer server list.
 
@@ -20,6 +20,7 @@ PureMOTD only uses public Bukkit API. It does not use NMS, CraftBukkit internals
 - Minecraft `&` color code support.
 - Optional custom displayed max-player count.
 - Custom in-game TAB player-list header and footer.
+- Automatic TAB refresh for live placeholders such as `%time%`, `%online%`, and `%max%`.
 - `/puremotd reload` hot reload.
 
 ## Command
@@ -54,6 +55,7 @@ motd:
 
 tab-list:
   enabled: true
+  refresh-interval-seconds: 1
   header:
     - "&d&lPureblock &8| &bPureblock"
     - "&7Online: &a%online%&7/&e%max%"
@@ -66,7 +68,7 @@ max-players:
   value: 100
 ```
 
-After editing the config, run `/puremotd reload`.
+After editing the config, run `/puremotd reload`. `refresh-interval-seconds` controls the automatic TAB refresh interval in seconds, with a minimum of `1`.
 
 Supported placeholders:
 

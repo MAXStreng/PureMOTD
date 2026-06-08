@@ -1,5 +1,5 @@
 name: PureMOTD
-version: 1.1.0
+version: 1.2.0
 main: com.mc.puremotd.PureMOTDPlugin
 api-version: '1.20'
 author: MoonMiut

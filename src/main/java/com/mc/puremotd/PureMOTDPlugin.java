@@ -9,6 +9,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.server.ServerListPingEvent;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitTask;
 
 import java.time.Instant;
 import java.time.ZoneId;
@@ -18,12 +19,19 @@ import java.util.Map;
 
 public final class PureMOTDPlugin extends JavaPlugin implements Listener {
     private static final DateTimeFormatter DISPLAY_TIME = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").withZone(ZoneId.systemDefault());
+    private BukkitTask tabRefreshTask;
 
     @Override
     public void onEnable() {
         saveDefaultConfig();
         getServer().getPluginManager().registerEvents(this, this);
+        startTabRefreshTask();
         getLogger().info("PureMOTD 已加载。使用 /puremotd reload 重载配置。");
+    }
+
+    @Override
+    public void onDisable() {
+        stopTabRefreshTask();
     }
 
     @EventHandler
@@ -58,6 +66,7 @@ public final class PureMOTDPlugin extends JavaPlugin implements Listener {
                 return true;
             }
             reloadConfig();
+            startTabRefreshTask();
             refreshTabList();
             sender.sendMessage(color("&aPureMOTD 配置已重载。"));
             return true;
@@ -108,6 +117,22 @@ public final class PureMOTDPlugin extends JavaPlugin implements Listener {
     private void refreshTabList() {
         for (Player player : getServer().getOnlinePlayers()) {
             applyTabList(player);
+        }
+    }
+
+    private void startTabRefreshTask() {
+        stopTabRefreshTask();
+        if (!getConfig().getBoolean("tab-list.enabled", true)) {
+            return;
+        }
+        long seconds = Math.max(1L, getConfig().getLong("tab-list.refresh-interval-seconds", 1L));
+        tabRefreshTask = getServer().getScheduler().runTaskTimer(this, this::refreshTabList, seconds * 20L, seconds * 20L);
+    }
+
+    private void stopTabRefreshTask() {
+        if (tabRefreshTask != null) {
+            tabRefreshTask.cancel();
+            tabRefreshTask = null;
         }
     }
 
